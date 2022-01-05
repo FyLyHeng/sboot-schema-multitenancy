@@ -19,10 +19,11 @@ public class FlywayConfig {
     @Bean
     public Flyway flyway(DataSource dataSource) {
         logger.info("Migrating default schema ");
-        Flyway flyway = new Flyway();
-        flyway.setLocations("db/migration/default");
-        flyway.setDataSource(dataSource);
-        flyway.setSchemas("DEFAULT_SCHEMA");
+        Flyway flyway = Flyway.configure()
+                .locations("db/migration/default")
+                .dataSource(dataSource)
+                .schemas(DEFAULT_SCHEMA)
+                .load();
         flyway.migrate();
         return flyway;
     }
@@ -31,10 +32,11 @@ public class FlywayConfig {
     public Boolean tenantsFlyway(TenantRepository repository, DataSource dataSource){
         repository.findAll().forEach(tenant -> {
             String schema = tenant.getSchemaName();
-            Flyway flyway = new Flyway();
-            flyway.setLocations("db/migration/tenants");
-            flyway.setDataSource(dataSource);
-            flyway.setSchemas(schema);
+            Flyway flyway = Flyway.configure()
+                    .locations("db/migration/tenants")
+                    .dataSource(dataSource)
+                    .schemas(schema)
+                    .load();
             flyway.migrate();
         });
         return true;

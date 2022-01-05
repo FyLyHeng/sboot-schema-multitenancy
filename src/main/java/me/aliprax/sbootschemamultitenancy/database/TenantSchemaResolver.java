@@ -1,9 +1,6 @@
 package me.aliprax.sbootschemamultitenancy.database;
 
-import me.aliprax.sbootschemamultitenancy.database.repositories.TenantRepository;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component

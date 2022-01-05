@@ -32,11 +32,11 @@ public class TenantController {
         tenant = repository.save(tenant);
         String schema = tenant.getSchemaName();
         if(schema==null) throw new RuntimeException("schema is null");
-        Flyway flyway = new Flyway();
-        flyway.setLocations("db/migration/tenants");
-        flyway.setDataSource(dataSource);
-        flyway.setSchemas(schema);
-        flyway.migrate();
+        Flyway.configure()
+                .locations("db/migration/tenants")
+                .dataSource(dataSource)
+                .schemas(schema)
+                .load().migrate();
         return tenant;
     }
 

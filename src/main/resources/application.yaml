@@ -9,6 +9,6 @@ spring:
     properties:
       hibernate:
         physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-
-flyway.enabled: true
+  flyway:
+    enabled: false
 
